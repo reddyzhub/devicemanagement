@@ -12,14 +12,20 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
+/**
+ * Test class for DeviceRepository.
+ * Uses DataJpaTest for configuring JPA tests and ActiveProfiles to set the test profile.
+ */
 @DataJpaTest
 @ActiveProfiles("test")
 public class DeviceRepositoryTest {
 
     @Autowired
     private DeviceRepository deviceRepository;
-
+    /**
+     * Sets up the test data before each test.
+     * Clears the repository and adds some initial devices.
+     */
     @BeforeEach
     void setUp() {
         deviceRepository.deleteAll();
@@ -46,6 +52,10 @@ public class DeviceRepositoryTest {
         deviceRepository.save(device2);
         deviceRepository.save(device3);
     }
+    /**
+     * Tests finding devices by brand.
+     * Ensures the correct number of devices are returned and their names match.
+     */
 
     @Test
     void whenFindByBrand_thenReturnDevices() {
@@ -54,6 +64,11 @@ public class DeviceRepositoryTest {
         assertThat(devices).hasSize(2);
         assertThat(devices).extracting(Device::getName).containsExactlyInAnyOrder("Device1", "Device2");
     }
+
+    /**
+     * Tests finding a device by ID.
+     * Ensures the device is found and its details match.
+     */
 
     @Test
     void whenFindById_thenReturnDevice() {
@@ -70,6 +85,10 @@ public class DeviceRepositoryTest {
         assertThat(foundDevice).isPresent();
         assertThat(foundDevice.get().getName()).isEqualTo(device.getName());
     }
+    /**
+     * Tests saving a device.
+     * Ensures the device is saved and can be retrieved correctly.
+     */
 
     @Test
     void whenSaveDevice_thenDeviceIsSaved() {
@@ -86,6 +105,10 @@ public class DeviceRepositoryTest {
         assertThat(foundDevice).isPresent();
         assertThat(foundDevice.get().getName()).isEqualTo("Device5");
     }
+    /**
+     * Tests deleting a device.
+     * Ensures the device is deleted and cannot be retrieved.
+     */
 
     @Test
     void whenDeleteDevice_thenDeviceIsDeleted() {
