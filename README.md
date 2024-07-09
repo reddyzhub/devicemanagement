@@ -12,6 +12,7 @@ This application is a REST API for managing devices. It allows users to perform 
     - [Swagger Configuration](#swagger-configuration)
     - [Security Configuration](#security-configuration)
 - [Testing](#testing)
+- [Design Patterns](#design-patterns)
 
 ## Features
 
@@ -275,6 +276,61 @@ The `PasswordEncoder` bean is commented out in the configuration. If you need to
 ```
 
 This setup provides a basic but secure foundation for managing authentication and authorization within the application. Feel free to adjust the security settings as per your requirements.
-# Testing
+
+## Testing
 
 Unit tests are provided for `DeviceRepository`, `DeviceController`, and `DeviceService` to ensure the correctness of the application's functionality. These tests cover basic CRUD operations, validation, and error handling to ensure robustness and reliability.
+
+## Design Patterns
+
+#### Various Design Patterns Used:
+
+- **Data Transfer Object (DTO) Pattern**:
+  - **Class**: `DeviceDTO`
+  - **Purpose**: Used to transfer data between different layers of the application. DTOs help in decoupling the internal data structures from the data exposed to the clients.
+
+- **Repository Pattern**:
+  - **Class**: `DeviceRepository`
+  - **Purpose**: Encapsulates the logic for accessing data sources. It provides a collection-like interface for accessing domain objects.
+
+- **Service Layer Pattern**:
+  - **Class**: `DeviceService`
+  - **Purpose**: Defines a layer for business logic and transaction management. It acts as an intermediary between the controller and repository layers.
+
+- **Controller Pattern**:
+  - **Class**: `DeviceController`
+  - **Purpose**: Handles HTTP requests and responses. It orchestrates calls to the service layer and maps the service layer responses to HTTP responses.
+
+- **Dependency Injection Pattern**:
+  - **Framework**: Spring Framework (e.g., `@Autowired`, `@Service`, `@Repository`, `@Bean`)
+  - **Purpose**: Promotes loose coupling and easier testing by injecting dependencies rather than creating them within classes.
+
+- **Builder Pattern**:
+  - **Class**: `Device` (using Lombok's `@Builder`)
+  - **Purpose**: Provides a flexible solution to constructing complex objects. It helps in creating objects with a clear and concise syntax.
+
+### Testing Patterns
+
+- **Unit Testing**:
+  - **Frameworks**: JUnit 5, Mockito
+  - **Purpose**: Tests individual components in isolation (e.g., `DeviceServiceTest`, `DeviceControllerTest`, `DeviceRepositoryTest`).
+
+- **Mocking**:
+  - **Framework**: Mockito
+  - **Purpose**: Creates mock objects for dependencies to test a class in isolation. Methods like `when`, `verify`, and `any` are used to set expectations and verify behavior.
+
+- **Behavior-Driven Development (BDD)**:
+  - **Framework**: AssertJ (e.g., `assertThat`)
+  - **Purpose**: Provides a more readable and expressive way of writing assertions, making the tests more understandable.
+
+- **Test Lifecycle Management**:
+  - **Annotations**: `@BeforeEach`, `@AfterEach`, `@Transactional`
+  - **Purpose**: Manages the setup and teardown of tests to ensure a consistent environment and handle transactions within tests.
+
+- **Profile-Specific Testing**:
+  - **Annotation**: `@ActiveProfiles("test")`
+  - **Purpose**: Ensures tests run with a specific Spring profile, allowing for configuration tailored to testing environments (e.g., in-memory databases).
+
+- **Test-Driven Development (TDD)**:
+  - **Approach**: Writing tests before implementing the actual functionality.
+  - **Purpose**: Ensures the application code is thoroughly tested and meets the specified requirements. This approach leads to better design, fewer bugs, and easier maintenance.
