@@ -49,7 +49,7 @@ H2 Database Console is available at `http://localhost:8080/h2-console` for datab
 
 ## API Endpoints
 
-There are endpoints
+These are endpoints
 
 | Method | Path          | Descriptions                                                       |
 |--------|---------------|--------------------------------------------------------------------|
