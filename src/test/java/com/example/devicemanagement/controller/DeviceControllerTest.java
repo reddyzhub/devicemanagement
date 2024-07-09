@@ -19,6 +19,9 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
+/**
+ * Unit tests for DeviceController.
+ */
 class DeviceControllerTest {
 
     @Mock
@@ -28,16 +31,26 @@ class DeviceControllerTest {
     private DeviceController deviceController;
 
     private AutoCloseable closeable;
+    /**
+     * Initializes mocks before each test.
+     */
 
     @BeforeEach
     void setUp() {
         closeable = MockitoAnnotations.openMocks(this);
     }
-
+    /**
+     * Closes mocks after each test.
+     */
     @AfterEach
     void tearDown() throws Exception {
         closeable.close();
     }
+
+    /**
+     * Test for adding a device.
+     * Ensures that the device is created and returned correctly.
+     */
 
     @Test
     void addDevice_shouldCreateDevice() {
@@ -54,6 +67,10 @@ class DeviceControllerTest {
         assertThat(responseEntity.getBody()).isEqualTo(createdDeviceDTO);
         verify(deviceService, times(1)).addDevice(any(DeviceDTO.class));
     }
+    /**
+     * Test for retrieving a device by ID.
+     * Ensures that the device is returned correctly if it exists.
+     */
 
     @Test
     void getDeviceById_shouldReturnDeviceIfExists() {
@@ -71,6 +88,11 @@ class DeviceControllerTest {
         verify(deviceService, times(1)).getDeviceById(id);
     }
 
+    /**
+     * Test for retrieving a device by ID when it does not exist.
+     * Ensures that a 404 status is returned.
+     */
+
     @Test
     void getDeviceById_shouldReturnNotFoundIfDeviceDoesNotExist() {
         // Arrange
@@ -84,6 +106,10 @@ class DeviceControllerTest {
         assertThat(responseEntity.getStatusCode().value()).isEqualTo(404);
         verify(deviceService, times(1)).getDeviceById(id);
     }
+    /**
+     * Test for retrieving all devices.
+     * Ensures that all devices are returned correctly.
+     */
 
     @Test
     void getAllDevices_shouldReturnAllDevices() {
@@ -102,6 +128,10 @@ class DeviceControllerTest {
         assertThat(responseEntity.getBody()).isEqualTo(devices);
         verify(deviceService, times(1)).getAllDevices();
     }
+    /**
+     * Test for updating a device.
+     * Ensures that the device is updated correctly if it exists.
+     */
 
     @Test
     void updateDevice_shouldUpdateDeviceIfExists() {
@@ -118,6 +148,10 @@ class DeviceControllerTest {
         assertThat(responseEntity.getBody()).isEqualTo(updatedDeviceDTO);
         verify(deviceService, times(1)).updateDevice(eq(id), any(DeviceDTO.class));
     }
+    /**
+     * Test for updating a device when it does not exist.
+     * Ensures that a 404 status is returned.
+     */
 
     @Test
     void updateDevice_shouldReturnNotFoundIfDeviceDoesNotExist() {
@@ -133,6 +167,10 @@ class DeviceControllerTest {
         assertThat(responseEntity.getStatusCode().value()).isEqualTo(404);
         verify(deviceService, times(1)).updateDevice(eq(id), any(DeviceDTO.class));
     }
+    /**
+     * Test for partially updating a device.
+     * Ensures that the device is updated correctly if it exists.
+     */
 
     @Test
     void updateDevicePartially_shouldUpdateDeviceIfExists() {
@@ -152,6 +190,10 @@ class DeviceControllerTest {
         assertThat(responseEntity.getBody()).isEqualTo(updatedDeviceDTO);
         verify(deviceService, times(1)).updateDevicePartially(eq(id), any(Map.class));
     }
+    /**
+     * Test for partially updating a device when it does not exist.
+     * Ensures that a 404 status is returned.
+     */
 
     @Test
     void updateDevicePartially_shouldReturnNotFoundIfDeviceDoesNotExist() {
@@ -167,6 +209,10 @@ class DeviceControllerTest {
         assertThat(responseEntity.getStatusCode().value()).isEqualTo(404);
         verify(deviceService, times(1)).updateDevicePartially(eq(id), any(Map.class));
     }
+    /**
+     * Test for deleting a device.
+     * Ensures that the device is deleted correctly if it exists.
+     */
 
     @Test
     void deleteDevice_shouldDeleteDeviceIfExists() {
@@ -181,6 +227,10 @@ class DeviceControllerTest {
         assertThat(responseEntity.getStatusCode().value()).isEqualTo(204);
         verify(deviceService, times(1)).deleteDevice(id);
     }
+    /**
+     * Test for deleting a device when it does not exist.
+     * Ensures that a 404 status is returned.
+     */
 
     @Test
     void deleteDevice_shouldReturnNotFoundIfDeviceDoesNotExist() {
@@ -195,6 +245,10 @@ class DeviceControllerTest {
         assertThat(responseEntity.getStatusCode().value()).isEqualTo(404);
         verify(deviceService, times(1)).deleteDevice(id);
     }
+    /**
+     * Test for searching devices by brand.
+     * Ensures that the correct devices are returned if found.
+     */
 
     @Test
     void searchDevicesByBrand_shouldReturnDevicesIfFound() {
@@ -214,6 +268,10 @@ class DeviceControllerTest {
         assertThat(responseEntity.getBody()).isEqualTo(devices);
         verify(deviceService, times(1)).searchDevicesByBrand(brand);
     }
+    /**
+     * Test for searching devices by brand when no devices are found.
+     * Ensures that a 404 status is returned.
+     */
 
     @Test
     void searchDevicesByBrand_shouldReturnNotFoundIfNoDevicesFound() {
