@@ -26,6 +26,7 @@ public class SecurityConfiguration {
                                     antMatcher("/swagger-ui.html"),
                                     antMatcher("/v3/**"),
                                     antMatcher("/h2-console/**")).permitAll()
+                            // Permit all GET, PUT, POST, PATCH, and DELETE requests to /devices endpoints
                             .requestMatchers(antMatcher(HttpMethod.GET, "/devices")).permitAll()
                             .requestMatchers(antMatcher(HttpMethod.GET, "/devices/**")).permitAll()
                             .requestMatchers(antMatcher(HttpMethod.PUT, "/devices/**")).permitAll()

@@ -11,6 +11,7 @@ This application is a REST API for managing devices. It allows users to perform 
     - [Database Configuration](#database-configuration)
     - [Swagger Configuration](#swagger-configuration)
     - [Security Configuration](#security-configuration)
+- [Testing](#testing)
 
 ## Features
 
@@ -274,3 +275,6 @@ The `PasswordEncoder` bean is commented out in the configuration. If you need to
 ```
 
 This setup provides a basic but secure foundation for managing authentication and authorization within the application. Feel free to adjust the security settings as per your requirements.
+# Testing
+
+Unit tests are provided for `DeviceRepository`, `DeviceController`, and `DeviceService` to ensure the correctness of the application's functionality. These tests cover basic CRUD operations, validation, and error handling to ensure robustness and reliability.
