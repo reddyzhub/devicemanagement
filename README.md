@@ -1,6 +1,6 @@
 # Device Management
 
-This application is a REST API for managing devices. It allows users to perform CRUD operations.
+This application is a REST API for managing devices. It allows users to perform CRUD operations. It is built using Java and Springboot along with H2 as in memory Database. 
 
 ## Table of Contents
 - [Features](#features)
