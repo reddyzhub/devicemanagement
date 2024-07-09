@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * REST controller for managing devices.
+ * Uses Swagger annotations for API documentation.
+ */
 @RestController
 @RequestMapping("/devices")
 @Tag(name = "Device Management", description = "APIs for managing devices")
@@ -21,7 +25,11 @@ public class DeviceController {
 
     @Autowired
     private DeviceService deviceService;
-
+    /**
+     * Adds a new device.
+     * @param deviceDTO Data transfer object containing device details.
+     * @return The created device.
+     */
     @PostMapping
     @Operation(summary = "Add a new device", description = "Creates a new device and returns the created device.")
     @ApiResponses(value = {
@@ -33,6 +41,11 @@ public class DeviceController {
         DeviceDTO createdDevice = deviceService.addDevice(deviceDTO);
         return ResponseEntity.status(201).body(createdDevice);
     }
+    /**
+     * Retrieves a device by its ID.
+     * @param id The ID of the device.
+     * @return The device data.
+     */
 
     @GetMapping("/{id}")
     @Operation(summary = "Get a device by ID", description = "Retrieves a device by its ID.")
@@ -49,6 +62,10 @@ public class DeviceController {
             return ResponseEntity.status(404).body(null);
         }
     }
+    /**
+     * Retrieves all devices.
+     * @return A list of all devices.
+     */
 
     @GetMapping
     @Operation(summary = "Get all devices", description = "Retrieves all devices.")
@@ -60,6 +77,13 @@ public class DeviceController {
         List<DeviceDTO> devices = deviceService.getAllDevices();
         return ResponseEntity.ok(devices);
     }
+
+    /**
+     * Updates an existing device.
+     * @param id The ID of the device to update.
+     * @param updatedDeviceDTO Data transfer object containing updated device details.
+     * @return The updated device data.
+     */
 
     @PutMapping("/{id}")
     @Operation(summary = "Update a device", description = "Updates an existing device with new data.")
@@ -77,6 +101,12 @@ public class DeviceController {
         }
     }
 
+    /**
+     * Partially updates an existing device.
+     * @param id The ID of the device to update.
+     * @param fields A map containing the fields to update.
+     * @return The updated device data.
+     */
     @PatchMapping("/{id}")
     @Operation(summary = "Partially update a device", description = "Partially updates an existing device with new data.")
     @ApiResponses(value = {
@@ -92,6 +122,11 @@ public class DeviceController {
             return ResponseEntity.status(404).body(null);
         }
     }
+    /**
+     * Deletes a device by its ID.
+     * @param id The ID of the device to delete.
+     * @return Response entity with status.
+     */
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a device", description = "Deletes a device by its ID.")
@@ -108,6 +143,11 @@ public class DeviceController {
             return ResponseEntity.status(404).build();
         }
     }
+    /**
+     * Searches devices by brand.
+     * @param brand The brand of the devices to search for.
+     * @return A list of devices with the specified brand.
+     */
 
     @GetMapping("/search/brand/{brand}")
     @Operation(summary = "Search devices by brand", description = "Searches for devices by their brand.")
