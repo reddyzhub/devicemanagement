@@ -112,7 +112,7 @@ These are endpoints
             "brand": "Device Brand",
             "creationTime": "2023-07-09T12:34:56"
         },
-        ...
+        
     ]
     ```
 
@@ -176,7 +176,7 @@ These are endpoints
             "brand": "Device Brand",
             "creationTime": "2023-07-09T12:34:56"
         },
-        ...
+        
     ]
     ```
 
