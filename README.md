@@ -1,6 +1,6 @@
 # Device Management
 
-This application is a REST API for managing devices. It allows users to perform CRUD operations and search for devices by brand.
+This application is a REST API for managing devices. It allows users to perform CRUD operations.
 
 ## Table of Contents
 - [Features](#features)
