@@ -19,6 +19,10 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+/**
+ * Unit tests for DeviceService.
+ */
+
 class DeviceServiceTest implements AutoCloseable {
 
     @Mock
@@ -33,6 +37,10 @@ class DeviceServiceTest implements AutoCloseable {
     void setUp() {
         mocks = MockitoAnnotations.openMocks(this);
     }
+    /**
+     * Test for adding a device.
+     * Ensures that the device is saved and returned correctly.
+     */
 
     @Test
     void addDevice_shouldSaveDevice() {
@@ -55,6 +63,10 @@ class DeviceServiceTest implements AutoCloseable {
         assertThat(savedDevice.name()).isEqualTo("Device1");
         verify(deviceRepository, times(1)).save(any(Device.class));
     }
+    /**
+     * Test for retrieving a device by ID.
+     * Ensures that the device is returned correctly if it exists.
+     */
 
     @Test
     void getDeviceById_shouldReturnDeviceIfExists() {
@@ -71,6 +83,10 @@ class DeviceServiceTest implements AutoCloseable {
         assertThat(foundDevice.id()).isEqualTo(id);
         verify(deviceRepository, times(1)).findById(id);
     }
+    /**
+     * Test for retrieving a device by ID when it does not exist.
+     * Ensures that an exception is thrown.
+     */
 
     @Test
     void getDeviceById_shouldThrowExceptionIfDeviceNotFound() {
@@ -83,6 +99,10 @@ class DeviceServiceTest implements AutoCloseable {
                 .isInstanceOf(DeviceNotFoundException.class);
         verify(deviceRepository, times(1)).findById(id);
     }
+    /**
+     * Test for retrieving all devices.
+     * Ensures that all devices are returned correctly.
+     */
 
     @Test
     void getAllDevices_shouldReturnAllDevices() {
@@ -100,7 +120,10 @@ class DeviceServiceTest implements AutoCloseable {
         assertThat(deviceDTOs).hasSize(2);
         verify(deviceRepository, times(1)).findAll();
     }
-
+    /**
+     * Test for updating a device.
+     * Ensures that the device is updated correctly if it exists.
+     */
     @Test
     void updateDevice_shouldUpdateDeviceIfExists() {
         // Arrange
@@ -121,6 +144,10 @@ class DeviceServiceTest implements AutoCloseable {
         verify(deviceRepository, times(1)).findById(id);
         verify(deviceRepository, times(1)).save(any(Device.class));
     }
+    /**
+     * Test for updating a device when it does not exist.
+     * Ensures that an exception is thrown.
+     */
 
     @Test
     void updateDevice_shouldThrowExceptionIfDeviceNotFound() {
@@ -135,6 +162,11 @@ class DeviceServiceTest implements AutoCloseable {
         verify(deviceRepository, times(1)).findById(id);
     }
 
+    /**
+     * Test for deleting a device.
+     * Ensures that the device is deleted correctly if it exists.
+     */
+
     @Test
     void deleteDevice_shouldDeleteDeviceIfExists() {
         // Arrange
@@ -148,6 +180,10 @@ class DeviceServiceTest implements AutoCloseable {
         verify(deviceRepository, times(1)).existsById(id);
         verify(deviceRepository, times(1)).deleteById(id);
     }
+    /**
+     * Test for deleting a device when it does not exist.
+     * Ensures that an exception is thrown.
+     */
 
     @Test
     void deleteDevice_shouldThrowExceptionIfDeviceNotFound() {
@@ -161,6 +197,10 @@ class DeviceServiceTest implements AutoCloseable {
         verify(deviceRepository, times(1)).existsById(id);
         verify(deviceRepository, never()).deleteById(id);
     }
+    /**
+     * Test for searching devices by brand.
+     * Ensures that the correct devices are returned.
+     */
 
     @Test
     void searchDevicesByBrand_shouldReturnMatchingDevices() {
@@ -179,6 +219,9 @@ class DeviceServiceTest implements AutoCloseable {
         assertThat(deviceDTOs).hasSize(2);
         verify(deviceRepository, times(1)).findByBrand(brand);
     }
+    /**
+     * Closes mocks after each test.
+     */
 
     @Override
     public void close() throws Exception {
