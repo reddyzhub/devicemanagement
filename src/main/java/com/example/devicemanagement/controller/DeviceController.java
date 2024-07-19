@@ -23,8 +23,11 @@ import java.util.Map;
 @Tag(name = "Device Management", description = "APIs for managing devices")
 public class DeviceController {
 
-    @Autowired
-    private DeviceService deviceService;
+    private final DeviceService deviceService;
+
+    public DeviceController(DeviceService deviceService) {
+        this.deviceService = deviceService;
+    }
     /**
      * Adds a new device.
      * @param deviceDTO Data transfer object containing device details.
